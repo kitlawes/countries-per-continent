@@ -31,15 +31,19 @@
 <script src="countriesPerContinent.js"></script>
 <script>
     function showCountries(continent) {
-        var countriesPerContinent = getCountriesPerContinent();
-        var table = "<table border='1'>"
-        var countries = countriesPerContinent[continent]
-        debugger;
-        for (property in countries) {
-            table += "<tr><td>" + countries[property].name + "</td></tr>";
+        if (continent != "") {
+            var countriesPerContinent = getCountriesPerContinent();
+            var table = "<table border='1'>"
+            var countries = countriesPerContinent[continent]
+            debugger;
+            for (property in countries) {
+                table += "<tr><td>" + countries[property].name + "</td></tr>";
+            }
+            table += "</table>"
+            document.getElementById("countries").innerHTML = table;
+        } else {
+            document.getElementById("countries").innerHTML = "";
         }
-        table += "</table>"
-        document.getElementById("countries").innerHTML = table;
     }
 </script>
 
