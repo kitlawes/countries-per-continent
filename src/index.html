@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Countries per Continent</title>
+</head>
+<body>
+
+<h1>Countries per Continent</h1>
+
+<p>Select a continent from the drop-down menu.</p>
+<p>The countries of the continent you select will be shown in a table.</p>
+
+<select onchange="showCountries(this.value)">
+    <option value="">Select a continent</option>
+    <option value="africa">Africa</option>
+</select>
+
+<p id="countries"></p>
+
+<script src="africanCountries.js"></script>
+<script>
+function showCountries(continent) {
+    var africanCountries = getAfricanCountries();
+    var table = "<table border='1'>"
+    for (x in africanCountries) {
+        table += "<tr><td>" + africanCountries[x].name + "</td></tr>";
+    }
+    table += "</table>"
+    document.getElementById("countries").innerHTML = table;
+}
+</script>
+
+</body>
+</html>
