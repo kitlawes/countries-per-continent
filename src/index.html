@@ -8,34 +8,35 @@
 
 <h1>Countries per Continent</h1>
 
-<p>Select a continent from the drop-down menu.</p>
-<p>The countries of the selected continent will be shown in a table.</p>
+Select a continent from the drop-down menu
+<br />
+The countries of the selected continent will be shown in a table.
+<br />
+<br />
 
-<select onchange="showCountries(this.value)">
+<select id="dropDownMenu" onchange="showCountries(this.value)">
     <option value="">Select a Continent</option>
-    <option value="worldContinentsAndOceans">World Continents and Oceans</option>
-    <option value="africa">Africa</option>
-    <option value="caribbeanIslands">Caribbean Islands</option>
-    <option value="centralAmerica">Central America</option>
-    <option value="usaStates">USA States</option>
-    <option value="southAmerica">South America</option>
-    <option value="asia">Asia</option>
-    <option value="theMiddleEast">The Middle East</option>
-    <option value="oceaniaIslands">Oceania Islands</option>
-    <option value="europe">Europe</option>
-    <option value="ukCities">UK Cities</option>
 </select>
 
 <p id="countries"></p>
 
 <script src="countriesPerContinent.js"></script>
 <script>
+    var countriesPerContinent = getCountriesPerContinent();
+    var dropDownMenu = document.getElementById("dropDownMenu");
+    for (property in countriesPerContinent) {
+        var option = document.createElement("option");
+        option.value = property;
+        option.text = countriesPerContinent[property].text;
+        dropDownMenu.add(option);
+    }
+</script>
+<script>
     function showCountries(continent) {
         if (continent != "") {
             var countriesPerContinent = getCountriesPerContinent();
             var table = "<table border='1'>"
-            var countries = countriesPerContinent[continent]
-            debugger;
+            var countries = countriesPerContinent[continent].countries
             for (property in countries) {
                 table += "<tr><td>" + countries[property].name + "</td></tr>";
             }
