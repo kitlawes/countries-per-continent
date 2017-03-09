@@ -30,20 +30,48 @@ The countries of the selected continent will be shown in a table.
         option.text = countriesPerContinent[property].text;
         dropDownMenu.add(option);
     }
-</script>
-<script>
+    
     function showCountries(continent) {
         if (continent != "") {
+        
             var countriesPerContinent = getCountriesPerContinent();
-            var table = "<table border='1'>"
-            var countries = countriesPerContinent[continent].countries
+            var table = {html: "<table border='1'>"};
+            var countries = countriesPerContinent[continent].countries;
+            var column = 0;
+            var columnAmount = 3;
+            
+            // Populate the table with countries
             for (property in countries) {
-                table += "<tr><td>" + countries[property].name + "</td></tr>";
+                addCountryToTable(countries[property].name, table, column, columnAmount)
+                column = (column + 1) % columnAmount;
             }
-            table += "</table>"
-            document.getElementById("countries").innerHTML = table;
+            // Add empty cells to the table to complete the last row
+            if (column != 0) {
+                while (column < columnAmount) {
+                    addCountryToTable("", table, column, columnAmount)
+                    column++;
+                }
+            }
+            
+            table.html += "</table>";
+            document.getElementById("countries").innerHTML = table.html;
+            
         } else {
             document.getElementById("countries").innerHTML = "";
+        }
+    }
+    
+    function addCountryToTable(country, table, column, columnAmount) {
+        switch (column) {
+            case 0:
+                table.html += "<tr><td>" + country + "</td>";
+                break;
+            case columnAmount - 1:
+                table.html += "<td>" + country + "</td></tr>";
+                break;
+            default:
+                table.html += "<td>" + country + "</td>";
+                break;
         }
     }
 </script>
