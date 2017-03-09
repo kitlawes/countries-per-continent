@@ -14,14 +14,18 @@ The countries of the selected continent will be shown in a table.
 <br />
 <br />
 
-<select id="dropDownMenu" onchange="showCountries(this.value)">
+<select id="dropDownMenu">
     <option value="">Select a Continent</option>
 </select>
+<br />
+<br />
 
-<p id="countries"></p>
+<div id="countries"></div>
 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script src="countriesPerContinent.js"></script>
 <script>
+
     var countriesPerContinent = getCountriesPerContinent();
     var dropDownMenu = document.getElementById("dropDownMenu");
     for (property in countriesPerContinent) {
@@ -35,7 +39,7 @@ The countries of the selected continent will be shown in a table.
         if (continent != "") {
         
             var countriesPerContinent = getCountriesPerContinent();
-            var table = {html: "<table border='1'>"};
+            var table = {html: "<table id='countriesTable' border='1'>"};
             var countries = countriesPerContinent[continent].countries;
             var column = 0;
             var columnAmount = 3;
@@ -74,6 +78,16 @@ The countries of the selected continent will be shown in a table.
                 break;
         }
     }
+    
+    $(document).ready(function(){
+        $("#dropDownMenu").change(function(){
+            $("#countries").slideUp("slow", function() {
+                showCountries($("#dropDownMenu").find(":selected").attr("value"));
+            });
+            $("#countries").slideDown("slow");
+        });
+    });
+    
 </script>
 
 </body>

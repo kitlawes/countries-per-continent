@@ -287,7 +287,7 @@ function getCountriesPerContinent() {
             }
         },
         oceaniaIslands: {
-            text:'The Middle East',
+            text:'Oceania Islands',
             countries: {
                 HWI: {name:'Hawaii*'},
                 MWY: {name:'Midway Islands*'},
